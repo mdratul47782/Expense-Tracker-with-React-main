@@ -9,19 +9,19 @@ export default function TotalBalance({ totalBalance, totalIncome, totalExpense }
           <div className="bg-[#F9FAFB] flex lg:max-w-xs flex-col px-4 py-4">
             <dt className="text-base leading-7 text-gray-600">Balance</dt>
             <dd className={`order-first text-xl font-semibold tracking-tight sm:text-3xl ${balanceClass}`}>
-              BDT {totalBalance.toFixed(2)}
+              BDT {totalBalance}
             </dd>
           </div>
           <div className="bg-[#F9FAFB] flex lg:max-w-xs flex-col px-4 py-4">
             <dt className="text-base leading-7 text-gray-600">Total Income</dt>
             <dd className="order-first text-xl font-semibold tracking-tight text-gray-700 sm:text-3xl">
-              BDT {totalIncome.toFixed(2)}
+              BDT {totalIncome}
             </dd>
           </div>
           <div className="bg-[#F9FAFB] flex lg:max-w-xs flex-col px-4 py-4">
             <dt className="text-base leading-7 text-gray-600">Total Expense</dt>
             <dd className="order-first text-xl font-semibold tracking-tight text-gray-700 sm:text-3xl">
-              BDT {totalExpense.toFixed(2)}
+              BDT {totalExpense}
             </dd>
           </div>
         </dl>

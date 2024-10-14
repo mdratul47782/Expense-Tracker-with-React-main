@@ -72,7 +72,7 @@ export default function SubmissionForm({ onSave }) {
           <div
             onClick={() => handleToggle("expense")}
             className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
-              !isIncome ? "bg-teal-100 text-teal-800" : ""
+              !isIncome ? "bg-teal-600 text-white shadow-sm" : ""
             }`}
           >
             Expense
@@ -80,7 +80,7 @@ export default function SubmissionForm({ onSave }) {
           <div
             onClick={() => handleToggle("income")}
             className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
-              isIncome ? "bg-teal-100 text-teal-800" : ""
+              isIncome ? "bg-teal-600 text-white shadow-sm" : ""
             }`}
           >
             Income
