@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Income Component
-export default function Income({ tasks, deleteIncome }) {
+export default function Income({ tasks, deleteIncome,onEdit }) {
   const [isSortingOpen, setSortingOpen] = useState(false);
   const [isFilteringOpen, setFilteringOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("none");
@@ -184,22 +184,28 @@ export default function Income({ tasks, deleteIncome }) {
               <p className="text-xs text-gray-600">{task.date}</p>
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-base font-semibold text-gray-600 group-hover:-translate-x-14">
+              <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
                 BDT {task.amount}
               </p>
-              <div className="translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 absolute right-0 top-1/2 -translate-y-1/2">
+              <div className="translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 absolute right-0 top-1/2 -translate-y-1/2 transition-all ">
                 {/* Edit Button */}
-                <button className="hover:text-teal-600" title="Edit">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                    <path d="M13.5 6.5l4 4" />
-                  </svg>
+                <button className="hover:text-teal-600" title="Edit"
+                 onClick={()=>onEdit(task)}>
+                <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                      <path d="M13.5 6.5l4 4" />
+                    </svg>
                 </button>
                 {/* Delete Button */}
                 <button
@@ -208,18 +214,23 @@ export default function Income({ tasks, deleteIncome }) {
                   onClick={() => deleteIncome(task.id)}
                 >
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path d="M4 7l16 0" />
-                    <path d="M10 11l0 6" />
-                    <path d="M14 11l0 6" />
-                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                    <path d="M9 7l0 -3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1l0 3" />
-                  </svg>
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 7l16 0" />
+                      <path d="M10 11l0 6" />
+                      <path d="M14 11l0 6" />
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                      <path d="M9 7l1 -3h4l1 3" />
+                    </svg>
                 </button>
               </div>
             </div>
