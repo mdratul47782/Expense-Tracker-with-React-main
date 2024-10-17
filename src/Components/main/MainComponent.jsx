@@ -14,39 +14,46 @@ export default function MainComponent() {
   const handleAddTask = (task) => {
     const taskAmount = parseFloat(task.amount || 0);
 
-    if (task.type === "Income") {
-      // For income, add to total income and balance
-      setTotalIncome((prevIncome) => prevIncome + taskAmount);
-      setBalance((prevBalance) => prevBalance + taskAmount);
-    } else {
-      // For expense, add to total expense and subtract from balance
-      setTotalExpense((prevExpense) => prevExpense + taskAmount);
-      setBalance((prevBalance) => prevBalance - taskAmount);
-    }
-
     if (taskToUpdate) {
-      // Update the task if we're editing
+      // Update existing task
       const updatedTasks = tasks.map((t) =>
-        t.id === task.id ? task : t
+        t.id === taskToUpdate.id ? { ...task, id: taskToUpdate.id } : t
       );
       setTasks(updatedTasks);
       setTaskToUpdate(null); // Clear edit state
     } else {
-      // Add new task
-      setTasks((prevTasks) => [...prevTasks, task]);
+      // Create a new task with a unique ID
+      const newTask = { ...task, id: Date.now() };
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+
+      if (task.type === "Income") {
+        setTotalIncome((prevIncome) => prevIncome + taskAmount);
+        setBalance((prevBalance) => prevBalance + taskAmount);
+      } else {
+        setTotalExpense((prevExpense) => prevExpense + taskAmount);
+        setBalance((prevBalance) => prevBalance - taskAmount);
+      }
     }
   };
 
   const handleEditTask = (task) => {
-    setTaskToUpdate(task); // Pass task to be edited
+    setTaskToUpdate(task); // Set task to be edited
   };
 
-  const deleteExpense = (id) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-  };
+  const deleteTask = (id) => {
+    const taskToDelete = tasks.find((task) => task.id === id);
 
-  const deleteIncome = (id) => {
+    if (taskToDelete) {
+      const taskAmount = parseFloat(taskToDelete.amount || 0);
+      if (taskToDelete.type === "Income") {
+        setTotalIncome((prevIncome) => prevIncome - taskAmount);
+        setBalance((prevBalance) => prevBalance - taskAmount);
+      } else {
+        setTotalExpense((prevExpense) => prevExpense - taskAmount);
+        setBalance((prevBalance) => prevBalance + taskAmount);
+      }
+    }
+
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
   };
@@ -68,12 +75,12 @@ export default function MainComponent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
             <Income
               tasks={tasks.filter((task) => task.type === "Income")}
-              deleteIncome={deleteIncome}
+              deleteIncome={deleteTask}
               onEdit={handleEditTask}
             />
             <Expense
               tasks={tasks.filter((task) => task.type === "Expense")}
-              deleteExpense={deleteExpense}
+              deleteExpense={deleteTask}
               onEdit={handleEditTask}
             />
           </div>

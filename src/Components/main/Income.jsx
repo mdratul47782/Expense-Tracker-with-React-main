@@ -169,6 +169,7 @@ export default function Income({ tasks, deleteIncome,onEdit }) {
           </div>
         </div>
       </div>
+      
 
       {/* Income List */}
       <div className="p-4 divide-y">
